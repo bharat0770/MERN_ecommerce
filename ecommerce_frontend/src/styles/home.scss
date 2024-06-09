@@ -1,0 +1,32 @@
+.home-content {
+    .big-image {
+        height: 30rem;
+        width: 100%;
+        margin: auto;
+        background: url("../assets/bigImg2.jpeg") no-repeat center / cover;
+        background-color: black;
+    }
+
+    >h1 {
+        display: flex;
+        font-weight: lighter;
+        justify-content: space-between;
+
+        >.more-link {
+            padding: 20px;
+            text-decoration: none;
+            color: black;
+        }
+    }
+
+    >main {
+        width: 100%;
+        display: flex;
+        gap: 1rem;
+        overflow-x: auto;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+    }
+}

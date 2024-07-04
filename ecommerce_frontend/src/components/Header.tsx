@@ -6,7 +6,7 @@ const user = { id: '123', role: 'user' };
 
 const Header = () => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
-    const logoutHandeler = () => { };
+    const logoutHandeler = () => {};
     return (
         <>
             <nav className="Header">
@@ -17,15 +17,18 @@ const Header = () => {
                 <Link to="/cart"><FaShoppingBag /></Link>
                 {user.id ? (
                     <>
+                    <div className="user-dialog">
+
                         <button onClick={() => setIsOpen((prev) => !prev)}>
                             <FaUser />
                         </button>
                         <dialog className="login-dialog" open={isOpen}>
                             <div >
-                                <Link to='/orders'>orders</Link>
-                                <Link to="/signOut" onClick={logoutHandeler}><FaSignOutAlt /></Link>
+                                <Link to='/orders' className="user-links">orders</Link>
+                                <Link to="/login" className="user-links" onClick={logoutHandeler}><FaSignOutAlt /></Link>
                             </div>
                         </dialog>
+                    </div>
                     </>
                 ) : <Link to="/logIn"><FaSignInAlt /></Link>
                 }

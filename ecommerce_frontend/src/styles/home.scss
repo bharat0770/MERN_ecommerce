@@ -1,22 +1,29 @@
 .home-content {
-    .big-image {
-        height: 30rem;
+    margin : 0; 
+    padding : 0;
+    >.big-image {
+        border-radius: 1rem;
+        height: 20rem;
         width: 100%;
-        margin: auto;
+        margin: .5rem;
         background: url("../assets/bigImg2.jpeg") no-repeat center / cover;
-        background-color: black;
+        background-color: white;
     }
 
     >h1 {
         display: flex;
         font-weight: lighter;
         justify-content: space-between;
-
-        >.more-link {
+        background-color: rgba(255, 255, 255, 0.315);
+        align-items: center;
+        padding-left: 1rem;
+        border-radius: 1rem;
+        .more-link {
             padding: 20px;
             text-decoration: none;
             color: black;
         }
+
     }
 
     >main {
@@ -24,7 +31,7 @@
         display: flex;
         gap: 1rem;
         overflow-x: auto;
-
+        // background-color: rgb(223, 223, 223);
         &::-webkit-scrollbar {
             display: none;
         }

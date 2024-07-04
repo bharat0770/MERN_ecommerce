@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import CartItem from "../components/Cartitem"; 
-import Cartitem from "../components/Cartitem";
+import { Link } from "react-router-dom";
 const cartItem = [
     {
         productId : "ajslk;fj", 
@@ -16,7 +16,7 @@ const subTotal = 4000;
 const tax =  Math.round(subTotal * 0.18);
 const discount  = 400; 
 const shippingCharges = 100;
-const total  = subTotal + tax + shippingCharges; 
+const total  = subTotal + tax + shippingCharges -discount; 
 
 const Cart = () =>{
     const [CouponCode, setCouponCode] = useState<string>(""); 
@@ -49,20 +49,25 @@ const Cart = () =>{
             </>
     </main>
     <aside>
-    <p>SubTotal : {subTotal}</p>
-    <p>ShippingCharges: {shippingCharges}</p>
-    <p>Discount: {discount}</p>
+    <p>SubTotal : ₹{subTotal}</p>
+    <p>ShippingCharges : ₹{shippingCharges}</p>
+    <p>Tax : ₹{tax}</p>
+    
+    <p>Discount : <span className="red">{`-₹${discount}`}</span></p>
+    <b>Total : ₹{total}</b>
     <input type="text" placeholder="coupon code" value={CouponCode} onChange={(e)=>{
         setCouponCode(e.target.value);
         }} />
     { CouponCode &&(
         isValidCouponCode ? 
-        <span className="green">
+        <p className="green">
         {discount} off using the coupon code <code>{CouponCode}</code>
-        </span> :  <span className="red">invalid coupon</span>
+        </p> :  <p className="red">invalid coupon</p>
     )
     }
-    <p>Total : {total}</p>
+    {
+        cartItem.length > 0  && <p><Link className="checkout-link" to="/shipping">CheckOut</Link></p>
+    }
 </aside>
     </div>
     </>

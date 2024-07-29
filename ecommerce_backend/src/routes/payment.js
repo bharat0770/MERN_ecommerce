@@ -1,5 +1,10 @@
-const app = require("express"); 
-
-app.get("/payment/coupon", newCoupon); 
-
-module.exports = app; 
+const express = require("express");
+const { newCoupon, deleteCoupon, allCoupons, applyDiscount, singleCoupon, updateCoupon, createPaymentIntent } = require("../controllers/payment");
+const adminOnly = require("../middlewares/adminOnly");
+const app = express();
+app.post("/create",  createPaymentIntent);
+app.post("/coupon/new", adminOnly, newCoupon);
+app.get("/discount", applyDiscount);
+app.get("/coupon/all", adminOnly, allCoupons);
+app.route("/coupon/id").get(adminOnly, singleCoupon).delete(adminOnly, deleteCoupon).put(adminOnly,updateCoupon); 
+module.exports = app;   

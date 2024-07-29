@@ -112,12 +112,11 @@ const myCache = new NodeCache( { stdTTL: 100, checkperiod: 120 } );
 - cache latestProducts, singleProducts, adminProducts(ALL), productCategory  
 -- take measures for invalidating cache data ()
 */
-//* current task \bookmark\
 //? env & morgan setup   
 //? orders APIs
 
 // newOrder
-    // - add a function in feature to reduce stock
+// - add a function in feature to reduce stock
 // myOrder
 // adminOrders
 // orderDetails
@@ -125,5 +124,41 @@ const myCache = new NodeCache( { stdTTL: 100, checkperiod: 120 } );
 // orderDelete
 // work on improving caching 
 //? coupon schema and api (discount)
+// create coupon schema which contains code and amount 
+// create coupon api 
+//   createCoupon, singeCoupon, allCoupon, updatecoupon, deleteCoupon, applydiscount,
 //? payment route
-//? admin dashBoard Stats
+
+//? admin dashBoard Stats 
+//* current task \bookmark\ time : 5.20 
+// Apis
+    //% /stats : 
+//          Database Queries :
+// Fetches data related to products, users, and orders for the current and previous months. It also fetches counts of products, users, and orders over different periods, and the latest transactions.
+//          Calculations :
+// Revenue: Total income from orders.
+// Change Percentages: Percentage changes in revenue, product additions, user registrations, and order counts from last month to this month.
+// Monthly Order Counts and Revenue: Counts of orders and their revenue over the last six months.
+// Category Count: Inventory counts per product category.
+// User Ratio: Ratio of male to female users.
+// Latest Transactions: List of recent transactions with specific details.
+    //% /pie :
+    // fetching the following data from DB 
+    // processingOrders,
+    // shippedOrders,
+    // deliveredOrders,
+    // productCount,
+    // categories,
+    // outOfstock,
+    // allOrders,
+    // allUsersDob,
+    // admins,
+    // users,
+    //% /bar : 
+    // fetching sixMonthProducts, sixMonthUser, twelveMonthOrders from DB
+    //% /line : 
+    // fetching products, user, orders, dicount, revenue over last 12 months
+//? payment Integration 
+
+    //* remaining
+    // - caching

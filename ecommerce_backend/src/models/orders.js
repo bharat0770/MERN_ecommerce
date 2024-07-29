@@ -68,7 +68,7 @@ const schema = mongoose.Schema({
     ]
     },
     {
-        timeStamp : true,
+        timestamps: true,
     }
 ); 
 const Orders = mongoose.model("Orders", schema); 

@@ -7,11 +7,8 @@ const path = require("path");
 const dirname = "C:\\Users\\BHAVESH\\Desktop\\sukuna\\WEBDEV\\PROJECTS\\ecommerce\\ecommerce_backend";
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        // cb(null, "/uploads"); == doesnt work 
-        // cb(null, "C:/Users/BHAVESH/Desktop/sukuna/WEBDEV/PROJECTS/ecommerce/ecommerce_backend/uploads");
         cb(null, path.join(dirname, "uploads"));
     },
-
     filename: function (req, file, cb) {
         let id  = v4();
         let extName = file.originalname.split('.').pop();

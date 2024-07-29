@@ -116,11 +116,21 @@ const deleteOrder = async(req, res, next) => {
     try{
         const id = req.query.id; 
         if(!id) return next(new errorHandler("Order Id doesn't exist", 400));
-        let order = await  Orders.findByIdAndDelete({_id:id})
-        res.status(201).json({
-            success : true, 
-            message : "Order Deleted successfully"
-        })
+    const order = await Orders.findById(id);  
+        if(order){
+            await  Orders.deleteOne({_id:id})
+            res.status(201).json({
+                success : true, 
+                message : "Order Deleted successfully"
+            })
+        }
+        else{
+            res.status(401).json({
+                success : false, 
+                message : "Order doen't exists", 
+            })
+
+        }
     } catch (err) {
         return next(new errorHandler(err.message, 400));
     }

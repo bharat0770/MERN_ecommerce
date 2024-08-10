@@ -1,30 +1,38 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { cartItem } from "../types/types";
+import { FaTrash } from "react-icons/fa";
 
 type Cartprops = {
-    cartItem : any 
+    cartItem : cartItem,
+    incrementHandler : (cartItem : cartItem) => void,    
+    decrementHandler : (cartItem : cartItem) => void,    
+    removeHandler : (productId : string) => void,    
 }
-
-const Cartitem  = ( {cartItem} : Cartprops)  => {
+const CartItemCard  = ( {cartItem, incrementHandler, decrementHandler, removeHandler} : Cartprops)  => {
 return (
     <>
     <div className="cart-item">
-        <img src={cartItem.photo} alt="product image"/>
+        <img src={`${import.meta.env.VITE_SERVER}/uploads/${cartItem.photo}`} alt="product image"/>
+        {/* <img src={cartItem.photo} alt="product image"/> */}
         <div className="cart-item-info">
         <div className="cart-item-name">
         <Link to = {`/poduct/${cartItem.productId}`}>{cartItem.name}</Link>
         <p>{`₹${cartItem.price}`}</p>
         </div>
         <div className="cart-item-btns">
-        <button>-</button>
+        <button onClick={() => decrementHandler(cartItem)}>-</button>
+        {/* <span>{cartItem.quantity}</span> */}
         <span>{cartItem.quantity}</span>
-        <button>+</button>
+        <button onClick={() => incrementHandler(cartItem)}>+</button>
+        <button onClick={() => removeHandler(cartItem.productId)}><FaTrash /></button>
         </div>
-        </div>
+
+        </div>      
     </div>
     </>
 )
 }
 
 
-export default Cartitem; 
+export default CartItemCard; 

@@ -22,15 +22,15 @@
             display: flex;
             align-items: center;
             padding: 20px;
-
-            img {
+            img{
                 float: left;
                 height: 100px;
                 width: 100px;
+                object-fit: contain;
             }
 
             >.cart-item-info {
-                // background-color: red;
+                // background-color: red;   
                 width: 100%;
                 display: flex;
                 justify-content: space-between;

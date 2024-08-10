@@ -1,7 +1,19 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ProductCard from "../components/Product-card";
-
+import { useCategoriesQuery, useSeachProductQuery } from "../redux/api/product";
+import { toast } from "react-hot-toast";
+import { customError } from "../types/api-types";
+import { cartItem } from "../types/types";
+import { addToCart } from "../redux/reducer/cartReducer";
+import { useDispatch } from "react-redux";
 const Search = () => {
+    const dispatch = useDispatch(); 
+    const { data, isLoading, isError, error } = useCategoriesQuery("");
+    if (isError) {
+        console.log(error);
+        const err = error as customError;
+        toast.error(err.data.message);
+    }
     const [search, setSearch] = useState("");
     const [maxprice, setMaxPrice] = useState(100000);
     const [sort, setSort] = useState("");
@@ -9,12 +21,34 @@ const Search = () => {
     const [page, setPage] = useState(1);
     const isNextPage = page < 4;
     const isPrevPage = page > 1;
-    const addToCartHandler = () => { };
+    const addToCartHandler = (cartItem : cartItem) => {
+        if(cartItem.stock < 1)return toast.error("Out of stock"); 
+        dispatch(addToCart(cartItem)); 
+        toast.success("Added to cart");
+    };
+
+    let searchObj = {
+        search: search,
+        price: maxprice,
+        category: category,
+        sort: sort,
+        page: page,
+    };
+    const {
+        data: searchedproducts,
+        isLoading: productsLoading,
+        isError: productsError,
+    } = useSeachProductQuery(searchObj);
+    console.log(searchedproducts);
+    if (productsError) {
+        console.log(error);
+        const err = error as customError;
+        toast.error(err.data.message);
+    }
     return (
         <div className="search-ui">
             <aside>
                 <h2>Filters</h2>
-
                 <div>
                     <h4>sort</h4>
                     <select
@@ -49,8 +83,12 @@ const Search = () => {
                         }}
                     >
                         <option value="">All</option>
-                        <option value="laptops">laptops</option>
-                        <option value="accessories">accessories</option>
+                        {!isLoading &&
+                            data?.message.map((i) => (
+                                <option key={i} value={i}>
+                                    {i.toUpperCase()}
+                                </option>
+                            ))}
                     </select>
                 </div>
             </aside>
@@ -65,7 +103,7 @@ const Search = () => {
                     />
                 </div>
                 <div className="product-list">
-                    <ProductCard
+                    {/* <ProductCard
                         productId="abck"
                         name="mackBook"
                         price={65000}
@@ -95,19 +133,48 @@ const Search = () => {
                             price={65000}
                             stock={500}
                             handler={addToCartHandler}
-                            photo="https://m.media-amazon.com/images/I/719C6bJv8jL._SX425_.jpg"
+                            photo="https://m.media-amazon.com/images/I/719C6bJv8jL._SX425_.jpg" 
+                        /> */}
+
+                    {searchedproducts?.message.map((product) => (
+                        <ProductCard
+                            key={product._id}
+                            productId={product._id}
+                            name={product.name}
+                            price={product.price}
+                            stock={product.stock}
+                            handler={addToCartHandler}
+                            photo={product.photo}
                         />
-                    
+                    ))}
                 </div>
-                <div className="pagination">
-                    <button className="prev" disabled={!isPrevPage} onClick={(e) => {setPage((prev) => prev-1)}}>
-                        prev
-                    </button>
-                    <p className="pg">{page} of {4}</p>
-                    <button className="next" disabled={!isNextPage} onClick={(e) => {setPage((prev) => prev+1)}}>
-                        next
-                    </button>
-                </div>
+                {
+                    searchedproducts && searchedproducts.totalPages > 1?  (
+                        <div className="pagination">
+                        <button
+                            className="prev"
+                            disabled={!isPrevPage}
+                            onClick={(e) => {
+                                setPage((prev) => prev - 1);
+                            }}
+                        >
+                            prev
+                        </button>
+                        <p className="pg">
+                            {page} of {4}
+                        </p>
+                        <button
+                            className="next"
+                            disabled={!isNextPage}
+                            onClick={(e) => {
+                                setPage((prev) => prev + 1);
+                            }}
+                        >
+                            next
+                        </button>
+                    </div>
+                    ): <div></div>
+                }
             </main>
         </div>
     );

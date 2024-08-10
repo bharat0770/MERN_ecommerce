@@ -1,6 +1,17 @@
-import React, { ChangeEvent, useState } from 'react'
+import React, { ChangeEvent, useEffect, useState } from 'react'
+import { useSelector } from 'react-redux';
+import { cartReducerInitialState } from '../types/reducer-types';
+import { useNavigate } from 'react-router-dom';
 
 let Shipping = () => {
+    const {cartItems} = useSelector((state : {cartReducer : cartReducerInitialState}) => state.cartReducer)
+    console.log(cartItems);
+    const navigate = useNavigate(); 
+    useEffect(() => {
+        if (cartItems.length <= 0){
+            return navigate("/");  
+        }
+    }, [cartItems]); 
     const [shippingInfo, setShippingInfo] = useState({
         address : "", 
         city : "", 

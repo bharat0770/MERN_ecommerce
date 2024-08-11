@@ -13,7 +13,6 @@ const connectDB = () => {
 
 const setCache = (key, productList) => {
     myCache.set(key, JSON.stringify(productList));
-    console.log(key + " cached");
 }
 const getCache = (key) => {
     if (myCache.has(key)) {
@@ -25,17 +24,18 @@ const validateCache = (key) => {
 }
 const invalidateCache = async (props) => {
     try {
-        const { product, order, admin } = props;
+        const { product, order, admin, id} = props;
         if (product) {
             let productkeys = [
-                "latest-product",
+                "latest-Product",
                 "product-categories",
                 "all-products",
+                `product-${id}`
             ];
-            const productIds = await Product.find({}).select("_id");
-            productIds.forEach((id) => {
-                productkeys.push(`product-${id}`);
-            })
+            // const productIds = await Product.find({}).select("_id");
+            // productIds.forEach((id) => {
+            //     productkeys.push(`product-${id}`);
+            // })
             myCache.del(productkeys);
         }
         if (order) { }

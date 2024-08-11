@@ -37,7 +37,7 @@ const newUser = async (req, res, next) => {
 
 
     catch (error) {
-        return next(new errorHandler(err.message, 400)); 
+        return next(new errorHandler(error.message, 400)); 
     }
 };
 
@@ -62,11 +62,11 @@ const allUser =  async (req, res, next) => {
 //! hence I used req.body to get the email to be searched for which makes it more secure
 const oneUser =  async(req, res, next) => {
     try{
-        if(!req.body.email){
+        if(!req.query.email){
             return next(new errorHandler("provided email is not valid", 400));
         }
         // let result = await User.findOne({email : req.params.email}); 
-        let result = await User.findOne({email : req.body.email}); 
+        let result = await User.findOne({email : req.query.email}); 
         
         if(!result){
             return next(new errorHandler("user doesn't exists", 400));

@@ -73,4 +73,3 @@ const schema = mongoose.Schema({
 ); 
 const Orders = mongoose.model("Orders", schema); 
 module.exports = Orders;
-

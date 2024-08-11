@@ -16,6 +16,7 @@ app.get("/admin-products",adminOnly, adminProducts);
 
 // app.route("/id").get().put().delete();
 app.get("/id", singleProduct); 
+// app.get("/:id", singleProduct); 
 app.delete("/id",adminOnly, deleteProduct); 
 app.put("/id", adminOnly, upload.single("photo"), updateProduct); 
 

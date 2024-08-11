@@ -12,7 +12,7 @@ const createPaymentIntent = async(req, res, next) => {
             amount : Number(amount)*100, 
             currency : "inr",
         })
-        res.status(201).json({
+        res.status(201).json({  
             success :  true,
             clientSecret : paymentIntent.client_secret, 
             })

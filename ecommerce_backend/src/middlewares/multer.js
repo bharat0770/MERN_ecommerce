@@ -4,10 +4,12 @@ const {v4  }= require("uuid");
 const path = require("path");
 
 //% configuring storage details as per our need
-const dirname = "C:\\Users\\BHAVESH\\Desktop\\sukuna\\WEBDEV\\PROJECTS\\ecommerce\\ecommerce_backend";
-const storage = multer.diskStorage({
+// const dirname = "C:\\Users\\BHAVESH\\Desktop\\sukuna\\WEBDEV\\PROJECTS\\ecommerce\\ecommerce_backend";
+// const dirname = "C:\\Users\\BHAVESH\\Desktop\\sukuna\\WEBDEV\\PROJECTS\\ecommerce\\ecommerce_backend";
+    const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, path.join(dirname, "uploads"));
+        // cb(null, path.join(dirname, "uploads"));
+        cb(null, "../ecommerce_backend/uploads");
     },
     filename: function (req, file, cb) {
         let id  = v4();

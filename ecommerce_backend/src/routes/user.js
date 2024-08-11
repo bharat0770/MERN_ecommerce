@@ -11,7 +11,7 @@ app.post("/new", newUser);
 app.get("/all", adminOnly, allUser); 
 
 // route - localhost:4000/api/v1/users/email 
-app.get("/email", adminOnly, oneUser); 
+app.get("/email", oneUser); 
 
 // route - localhost:4000/api/v1/users/delete 
 app.delete("/delete", adminOnly, deleteUser); 

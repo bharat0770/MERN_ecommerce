@@ -12,12 +12,14 @@ import { userReducerInitialState } from "./types/reducer-types";
 import { Loader } from "./components/loader";
 import ProtectedRoute from "./components/protected-route";
 import AdminHamburger from "./components/AdminHamburger";
+import { useAllOrderQuery } from "./redux/api/order";
 
 
 // admin routes
 const CreateProduct = lazy(() => import("./admin/management/createProduct"));
 const UpdateProduct = lazy(() => import("./admin/management/updateProduct"));
-const TransactionManagement = lazy(() => import("./admin/management/transactions"));
+const Transactions = lazy(() => import("./admin/management/transactions"));
+const TransactionManagement = lazy(() => import("./admin/management/transactionManagement"));
 
 // user routes
 const Home = lazy(() => import("./pages/Home"));
@@ -33,7 +35,6 @@ function App() {
     }
   );
   const dispatch = useDispatch();
-
   useEffect(() => {
     onAuthStateChanged(auth, async (user) => {
       try {
@@ -65,7 +66,8 @@ return  loading ? (
         {/* adminRoutes */}
         <Route path="admin/product/create" element={<CreateProduct/>}/>
         <Route path="admin/product/update" element={<UpdateProduct/>}/>
-        <Route path="admin/product/process" element={<TransactionManagement/>}/>
+        <Route path="admin/product/process" element={<Transactions/>}/>
+        <Route path="admin/transaction/:id" element={<TransactionManagement/>}/>
         {/* userRoutes */}
           <Route path="/" element={<Home />} />
           <Route

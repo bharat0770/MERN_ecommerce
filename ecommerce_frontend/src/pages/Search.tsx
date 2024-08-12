@@ -7,10 +7,9 @@ import { cartItem } from "../types/types";
 import { addToCart } from "../redux/reducer/cartReducer";
 import { useDispatch } from "react-redux";
 const Search = () => {
-    const dispatch = useDispatch(); 
+    const dispatch = useDispatch();
     const { data, isLoading, isError, error } = useCategoriesQuery("");
     if (isError) {
-        console.log(error);
         const err = error as customError;
         toast.error(err.data.message);
     }
@@ -21,9 +20,9 @@ const Search = () => {
     const [page, setPage] = useState(1);
     const isNextPage = page < 4;
     const isPrevPage = page > 1;
-    const addToCartHandler = (cartItem : cartItem) => {
-        if(cartItem.stock < 1)return toast.error("Out of stock"); 
-        dispatch(addToCart(cartItem)); 
+    const addToCartHandler = (cartItem: cartItem) => {
+        if (cartItem.stock < 1) return toast.error("Out of stock");
+        dispatch(addToCart(cartItem));
         toast.success("Added to cart");
     };
 
@@ -103,38 +102,6 @@ const Search = () => {
                     />
                 </div>
                 <div className="product-list">
-                    {/* <ProductCard
-                        productId="abck"
-                        name="mackBook"
-                        price={65000}
-                        stock={500}
-                        handler={addToCartHandler}
-                        photo="https://m.media-amazon.com/images/I/719C6bJv8jL._SX425_.jpg"
-                    />
-                    <ProductCard
-                        productId="abck"
-                        name="mackBook"
-                        price={65000}
-                        stock={500}
-                        handler={addToCartHandler}
-                        photo="https://m.media-amazon.com/images/I/719C6bJv8jL._SX425_.jpg"
-                    />
-                        <ProductCard
-                            productId="abck"
-                            name="mackBook"
-                            price={65000}
-                            stock={500}
-                            handler={addToCartHandler}
-                            photo="https://m.media-amazon.com/images/I/719C6bJv8jL._SX425_.jpg"
-                        />
-                        <ProductCard
-                            productId="abck"
-                            name="mackBook"
-                            price={65000}
-                            stock={500}
-                            handler={addToCartHandler}
-                            photo="https://m.media-amazon.com/images/I/719C6bJv8jL._SX425_.jpg" 
-                        /> */}
 
                     {searchedproducts?.message.map((product) => (
                         <ProductCard
@@ -149,31 +116,31 @@ const Search = () => {
                     ))}
                 </div>
                 {
-                    searchedproducts && searchedproducts.totalPages > 1?  (
+                    searchedproducts && searchedproducts.totalPages > 1 ? (
                         <div className="pagination">
-                        <button
-                            className="prev"
-                            disabled={!isPrevPage}
-                            onClick={(e) => {
-                                setPage((prev) => prev - 1);
-                            }}
-                        >
-                            prev
-                        </button>
-                        <p className="pg">
-                            {page} of {4}
-                        </p>
-                        <button
-                            className="next"
-                            disabled={!isNextPage}
-                            onClick={(e) => {
-                                setPage((prev) => prev + 1);
-                            }}
-                        >
-                            next
-                        </button>
-                    </div>
-                    ): <div></div>
+                            <button
+                                className="prev"
+                                disabled={!isPrevPage}
+                                onClick={(e) => {
+                                    setPage((prev) => prev - 1);
+                                }}
+                            >
+                                prev
+                            </button>
+                            <p className="pg">
+                                {page} of {4}
+                            </p>
+                            <button
+                                className="next"
+                                disabled={!isNextPage}
+                                onClick={(e) => {
+                                    setPage((prev) => prev + 1);
+                                }}
+                            >
+                                next
+                            </button>
+                        </div>
+                    ) : <div></div>
                 }
             </main>
         </div>

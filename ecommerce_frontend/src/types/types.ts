@@ -30,3 +30,29 @@ export type cartItem = {
     photo : string; 
     quantity : number; 
 }   
+
+
+export type orderItem = {
+    productId : string; 
+    price : number; 
+    name : string; 
+    photo : string; 
+    quantity : number; 
+    _id : string; 
+}
+export type order = {
+    _id : string; 
+    shippingInfo : ShippingInfo; 
+    orderItems : orderItem[]; 
+    subTotal : number;
+    tax : number; 
+    shippingCharges : number; 
+    discount : number; 
+    total : number;
+    status : string; 
+    user :{
+        _id :string; 
+        name : string; 
+    }; 
+}
+

@@ -48,7 +48,7 @@ const myOrders = async(req, res, next) => {
             return next(new errorHandler("UserId doesn't exist", 400));
         }
         
-        let order = await Orders.find({user}); 
+        let order = await Orders.find({user}).populate("orderItems"); 
         res.status(200).json({
             success : true,
             message : order,
@@ -59,8 +59,9 @@ const myOrders = async(req, res, next) => {
 } 
 const singleOrder = async(req, res, next) => {
     try{
-        const id = req.query.id; 
+        const id = req.query.id;  
         if(!id) return next(new errorHandler("invalid id", 400));
+        // let order = await Orders.findById(id).populate("user", "name"); 
         let order = await Orders.findById(id).populate("user", "name"); 
         return  res.status(201).json({
             success : true,
@@ -146,4 +147,5 @@ module.exports = {
     allOrders, 
     deleteOrder,
 }
+
 

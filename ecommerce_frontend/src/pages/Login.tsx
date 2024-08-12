@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { signInWithPopup, GoogleAuthProvider} from 'firebase/auth';
+import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 import { FcGoogle } from 'react-icons/fc';
 import { auth } from '../firebase';
 import toast from 'react-hot-toast';
@@ -7,14 +7,14 @@ import { useLoginMutation } from '../redux/api/user';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { MessageResponse } from '../types/api-types';
 
-const  Login = () => {
-    const [gender, setGender] = useState(""); 
-    const [birthDate, setBirthDate] = useState(""); 
-    const [login] =  useLoginMutation(); 
+const Login = () => {
+    const [gender, setGender] = useState("");
+    const [birthDate, setBirthDate] = useState("");
+    const [login] = useLoginMutation();
     const loginHandler = async () => {
-        try {  
-            const provider = new GoogleAuthProvider(); 
-            const { user } = await signInWithPopup(auth, provider);         
+        try {
+            const provider = new GoogleAuthProvider();
+            const { user } = await signInWithPopup(auth, provider);
             const userData = {
                 name: user.displayName || "Unknown",
                 email: user.email || "No email",
@@ -24,7 +24,7 @@ const  Login = () => {
                 dob: birthDate,  // Set a default or appropriate value
                 _id: user.uid,
             };
-    
+
             const res = await login(userData);
             if ('data' in res) {
                 toast.success(res.data ? res.data.message : "Login successful, but no message received");
@@ -36,7 +36,6 @@ const  Login = () => {
                 // toast.error(message);
             }
         } catch (error) {
-            console.error("Sign in error", error);
             toast.error("Sign in failed");
         }
     };
@@ -44,35 +43,35 @@ const  Login = () => {
     return (
         <div className="login">
 
-        <div className="userLogin">
-            <h1>Login</h1>
-            <div className="userForm">
-                <p>Gender</p>
-                <select
-                name="gender" 
-                value={gender}
-                onChange={(e) => setGender(e.target.value)}
-                >
-                    <option value="">select</option>
-                    <option value="male">male</option>
-                    <option value="female">female</option>
-                </select>
+            <div className="userLogin">
+                <h1>Login</h1>
+                <div className="userForm">
+                    <p>Gender</p>
+                    <select
+                        name="gender"
+                        value={gender}
+                        onChange={(e) => setGender(e.target.value)}
+                    >
+                        <option value="">select</option>
+                        <option value="male">male</option>
+                        <option value="female">female</option>
+                    </select>
                     <p>Date Of Birth</p>
-                <input 
-                type="date"
-                value = {birthDate}
-                onChange={(e) => setBirthDate(e.target.value)} 
-                />
-            </div>
+                    <input
+                        type="date"
+                        value={birthDate}
+                        onChange={(e) => setBirthDate(e.target.value)}
+                    />
+                </div>
 
-            <div>
-                <p>already signed in?</p>
-                <button onClick={loginHandler}>
-                    <FcGoogle className='gicon'/> <span> sign in with Google </span>
-                </button>
+                <div>
+                    <p>already signed in?</p>
+                    <button onClick={loginHandler}>
+                        <FcGoogle className='gicon' /> <span> sign in with Google </span>
+                    </button>
+                </div>
             </div>
         </div>
-                </div>
     );
 }
 

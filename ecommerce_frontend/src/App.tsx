@@ -20,6 +20,7 @@ const CreateProduct = lazy(() => import("./admin/management/createProduct"));
 const UpdateProduct = lazy(() => import("./admin/management/updateProduct"));
 const Transactions = lazy(() => import("./admin/management/transactions"));
 const TransactionManagement = lazy(() => import("./admin/management/transactionManagement"));
+const CustomerManagement = lazy(() => import("./admin/management/customers"));
 
 // user routes
 const Home = lazy(() => import("./pages/Home"));
@@ -27,6 +28,9 @@ const Cart = lazy(() => import("./pages/Cart"));
 const Shipping = lazy(() => import("./pages/Shipping"));
 const Login = lazy(() => import("./pages/Login"));
 const Search = lazy(() => import("./pages/Search"));
+import ProductManagement from "./pages/ProductManagement"; 
+import Orders from "./pages/Orders";
+import CheckOut from "./pages/CheckOut";
 function App() {
   // dispatch is a function/hook that we use to perform some action on store and selector is used to get data from store
   const { user, loading } = useSelector(
@@ -58,7 +62,6 @@ return  loading ? (
     <Loader />
   ) : (
     <BrowserRouter> 
-    
       <Header user={user}/>
       {user?.role === 'admin' && <AdminHamburger/>}
       <Suspense fallback={<div>Please wait</div>}>
@@ -68,23 +71,25 @@ return  loading ? (
         <Route path="admin/product/update" element={<UpdateProduct/>}/>
         <Route path="admin/product/process" element={<Transactions/>}/>
         <Route path="admin/transaction/:id" element={<TransactionManagement/>}/>
+        <Route path="admin/customers" element={<CustomerManagement/>}/>
         {/* userRoutes */}
           <Route path="/" element={<Home />} />
-          <Route
-            path="/Login"
-            element={
+          <Route path="/Login" element={
               <ProtectedRoute isAuthenticated={user ? false : true}>
                 <Login />
               </ProtectedRoute>
             }
           />
           <Route path="/Search" element={<Search />} />
-          <Route
-            element={<ProtectedRoute isAuthenticated={user ? true : false} />}
-          >
+          <Route path="/Orders" element={<Orders />} />
+          <Route element={
+            <ProtectedRoute isAuthenticated={user ? true : false} />}>
             <Route path="/shipping" element={<Shipping />} />
           </Route>
+
           <Route path="/cart" element={<Cart />} />
+          <Route path="/pay" element={<CheckOut />} />
+          <Route path="/product/:id" element={<ProductManagement />} />
         </Routes>
       </Suspense>
       <Toaster position="bottom-center" />

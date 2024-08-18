@@ -17,7 +17,7 @@ const newOrder = async (req, res, next) => {
             status,
             orderItems
         } = req.body;
-        if (!shippingInfo || !user || !tax || !shippingCharges || !discount || !total) {
+        if (!shippingInfo || !user || !tax  || !total) {
             return next(new errorHandler("Please provide all required data", 400));
         }
         const order = await Orders.create({

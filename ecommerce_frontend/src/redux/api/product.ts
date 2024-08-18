@@ -53,6 +53,6 @@ export const productApi = createApi({
     })
 })
 
-export const { useLatestProductQuery, useCategoriesQuery, useSeachProductQuery, useNewProductsMutation, useProductDetailsQuery, useUpdateProudctMutation, useDeleteProductMutation } = productApi;
+export const { useLatestProductQuery, useCategoriesQuery, useSeachProductQuery, useNewProductsMutation,  useUpdateProudctMutation, useDeleteProductMutation, useProductDetailsQuery} = productApi;
 
 

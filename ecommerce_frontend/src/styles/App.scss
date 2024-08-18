@@ -14,9 +14,11 @@ $boxshadow: 0px 5px 5px 5px rgb(168, 168, 168);
 @import "shipping.scss";
 @import "login.scss";
 @import "search.scss";
+@import "ProductManagement.scss"; 
 @import "../admin/management/styles/createProduct.scss";
 @import "../admin/management/styles/updateProduct.scss";
 @import "../admin/management/styles/transactionManagement.scss";
+@import "../admin/management/styles/transaction.scss";
 *{
     font-size: small;
 }

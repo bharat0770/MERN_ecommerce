@@ -1,10 +1,25 @@
-import { order, orderItem, Product, ShippingInfo } from "./types";
+import { cartItem, order, orderItem, Product, ShippingInfo, User } from "./types";
 // for users
-// for products
+
 export type MessageResponse =  {
     success : boolean; 
     message : string;
 }
+export type allUserResponse =  {
+    success : boolean; 
+    message : User[];
+}
+export type deleteUserResponse = {
+    success : boolean;  
+    message : string;
+}
+export type deleteUserRequest = {
+    email : string; 
+    userEmail : string;
+}
+
+
+// for products
 export type allProductResponse = {
     success : boolean; 
     message : Product[];
@@ -17,7 +32,6 @@ export type categoriesResponse= {
 export type customError= {
     status : number, 
     data :{success : boolean,  
-        
         message : string}, 
     }
     
@@ -57,7 +71,7 @@ export type customError= {
     // for orders
     export type newOrderRequest = {
         shippingInfo :  ShippingInfo; 
-        orderItems : orderItem[]; 
+        orderItems : cartItem[]; 
         user : string,
         subTotal : number , 
         tax : number ,

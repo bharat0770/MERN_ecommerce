@@ -83,11 +83,11 @@ const oneUser =  async(req, res, next) => {
 
 const deleteUser = async(req, res, next) => {
     try {
-        let {email }= req.body; 
-        if(!email){
+        let {userEmail}= req.query; 
+        if(!userEmail){
             return next(new errorHandler("provided email is not valid", 400));
         }
-        let user = await User.findOne({email}); 
+        let user = await User.findOne({email : userEmail}); 
         
         if(!user){
             return next(new errorHandler("user doesn't exists", 400));

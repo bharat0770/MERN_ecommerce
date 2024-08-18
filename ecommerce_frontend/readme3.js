@@ -3,8 +3,6 @@
 //! FRONTEND 
 // refer ecommerce_frontend
 
-const { FaTruckLoading } = require("react-icons/fa");
-
 //! INTEGETION
 
 //! firebase functions and all 
@@ -85,6 +83,13 @@ const { FaTruckLoading } = require("react-icons/fa");
 // axios get
 // cancel  token    
 //* rtk for order 
+// allTransactions
+// singleTranscation
+// myOrders
+//* stripe payment 4:46
+// how does stripe payment works
+//*allUsers
+//*dashboard api 
 //? remaining 
 // skeleton-loading 
 // admin routes 
@@ -96,3 +101,4 @@ const { FaTruckLoading } = require("react-icons/fa");
 // invalidate  default rtk chache
 // create product 
 // update product 
+

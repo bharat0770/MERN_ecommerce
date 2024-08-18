@@ -11,7 +11,7 @@ import { addToCart } from '../redux/reducer/cartReducer';
 const Home = () => {
   const dispatch = useDispatch();
   const { data, isError, isLoading } = useLatestProductQuery("");
-  if (isError) toast.error("Cannot fetch products")
+  if (isError) toast.error("Cannot fetch products");
 
   const addToCartHandler = (cartItem: cartItem) => {
     if (cartItem.stock < 1) return toast.error("Out of stock");
@@ -23,7 +23,6 @@ const Home = () => {
     <>
       <div className="home-content">
         <div className="big-image">  </div>
-
         <h1>latest products
           <Link className="more-link" to="/search">more</Link>
         </h1>

@@ -1,47 +1,79 @@
 .transaction-management {
-    // display:  flex; 
-    // width: 100%; 
-    // height: auto;
-    // // justify-content: space-evenly;
-    // justify-content: center ;
-    // .orderItems{
-    //     display:  flex; 
-    //     flex-direction: column;
-    //     text-align: center;     
-    //     background-color: white;
-    //     width: 25%;
-    //     border : 1px solid grey;
-    //     box-shadow: $boxshadow;
-    //     border-radius: 5px;
-    //     padding: 20px;
-    // }
-    // .transaction-info{
-    //     // display:  flex; 
-    //     // flex-direction: column;
-    //     // text-align: center;      
-    //     background-color: white;
-    //     width: 25%;
-    //     border : 1px solid grey;
-    //     box-shadow: $boxshadow;
-    //         border-radius: 5px;
-    //     padding: 20px;
-    // }
-
-    .transaction-items{
-        display: flex;
-        justify-content: space-evenly;
+    display: flex;
+    justify-content: center;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    .orderItems {
         background-color: white;
-        margin : 10px;
-        span{
-            margin : 20px;
-        }
-        .transaction-manage{
-            background-color: $color3;
-            border: none;
+        display: flex;
+        flex-wrap: wrap;
+        border-radius: 5px;
+        border: 0.5px solid gray;
+        box-shadow: $boxshadow;
+        max-width: 60%;
+        height: auto;
+        min-width: 35%;
+        min-height: 35%;
+        padding: 20px;
+        margin: 20px;
+    }
+    .transaction-order-item {
+        background-color: whitesmoke;
+        padding: 5px;
+        margin: 5px;
+        border-radius: 5%;
+        max-width: 30%;
+        width: auto;
+        height: 40%;
+        max-height: auto;
+        justify-content: center;
+        display: flex;
+        flex-direction: column;
+        img {
+            width: 80%;
             border-radius: 10%;
-            color : white;
-            padding: 10px;
-            cursor: pointer;
+            height: auto;
+            object-fit: contain;
+            align-self: center;
         }
     }
- }  
+
+    .transaction-info{  
+        border: 0.5px solid gray;
+        border-radius: 5px;
+        box-shadow: $boxshadow;
+        background-color: white;
+        padding: 20px;
+        margin: 20px;
+        display: flex;
+        flex-direction: column; 
+        h1,h5{
+            align-self: center;
+        }
+    button{
+        border: none;
+        padding: 10px;
+        cursor: pointer;
+    }
+    .shipping-btn{
+        background-color: $color2;
+        color: white;
+        border-radius: 10px;
+        &:hover{
+            background-color: rgb(255, 174, 0);
+        }
+    }
+    .product-delete-btn{
+        background-color: $color3;
+        color: white;
+        width: 40px;
+        border-radius: 10px;
+        justify-self: flex-end;
+        align-self: flex-end;
+        &:hover{
+        background-color: crimson   ;
+    }
+    }
+    }
+}

@@ -1,8 +1,9 @@
 const express = require('express');
 const { connectDB, invalidateCache } = require('./util/features.js');
-const Stripe = require("stripe");
+// const Stripe = require("stripe");
 const dotenv = require("dotenv");
 const { config } = dotenv;
+config();
 const path = require('path');
 const cors = require("cors");
 // const upload = require('./middlewares/multer.js');
@@ -15,14 +16,13 @@ const paymentRoute = require("./routes/payment.js");
 const dashBoardRoute = require("./routes/stats.js")
 const cartRoute = require("./routes/cart.js")
 
-config();
 
 const port = process.env.PORT || 4000;
-const stripeKey = process.env.STRIPE_KEY || "";
+// const stripeKey = process.env.STRIPE_KEY || "";
 const app = express();
 app.use(express.json());
 app.use(cors());
-const stripe = new Stripe(stripeKey);
+// const stripe = new Stripe(stripeKey);
 app.use("/uploads", express.static(path.join(__dirname, "../uploads"))); 
 app.use('/api/v1/user', userRoute);
 app.use('/api/v1/product', productRoute);

@@ -1,16 +1,14 @@
-import React, { useState } from "react";
-import ProductCard from "../../components/Product-card";
-import updateProduct from "./updateProduct";
-import { useSelector } from "react-redux";
-import { userReducerInitialState } from "../../types/reducer-types";
-import { useAllOrderQuery } from "../../redux/api/order";
+import React from "react";
 import toast from "react-hot-toast";
-import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
-import { customError } from "../../types/api-types";
-import TransactionCard from "./components/transaction"
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { useAllOrderQuery } from "../../redux/api/order";
+import { customError } from "../../types/api-types";
+import { userReducerInitialState } from "../../types/reducer-types";
+import TransactionCard from "./components/transactionCard";
 const transactionManagement = () => {
     const navigate = useNavigate();
+
     const { user, loading } = useSelector(
         (state: { userReducer: userReducerInitialState }) => {
             return state.userReducer;
@@ -27,7 +25,7 @@ const transactionManagement = () => {
         navigate(`/admin/transaction/${id}`); 
     }   
     return (
-        <div className="transaction-management">
+        <div className="transaction">
             <div className="orderItems">
                 <h1>transactions</h1>
                 {data?.message.map((order) => (
@@ -39,13 +37,9 @@ const transactionManagement = () => {
                     status = {order.status}
                     handler={redirectToManagement}
                     />
-
                 ))}
-            </div>
-            <div className="transaction-info">
             </div>
         </div>
     );
 };
-
 export default transactionManagement;

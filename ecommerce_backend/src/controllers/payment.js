@@ -1,17 +1,23 @@
 
-const { default: Stripe } = require("stripe");
+const { Stripe } = require("stripe");
 const errorHandler = require("../middlewares/errorHandler.js");
 const Coupon = require("../models/coupon.js");
-const { CurrencyCodes } = require("validator/lib/isISO4217.js");
+// const { stripe } = require("../app.js");
+
+// const stripeKey = process.env.STRIPE_KEY || "sk_test_51PnvJ4EXtISc9LPGns8YyftZ3R7O22dW5BSkW8B6iyGyg01J0ZSynnRDTxW3XnUfXIkry50hSsCKCqgpfXOqV9RY00xgaA64hk"; 
+const stripeKey = process.env.STRIPE_KEY; 
+console.log(stripeKey); 
+
+const stripe = new Stripe(stripeKey);
 
 const createPaymentIntent = async(req, res, next) => {
     try {
-        const {amount} = req.query; 
+        const {amount} = req.body; 
         if(!amount)return next(new errorHandler("Please provide an amount", 401));  
-        const paymentIntent = await Stripe.paymentIntent.create({
-            amount : Number(amount)*100, 
-            currency : "inr",
-        })
+        const paymentIntent = await stripe.paymentIntents.create({
+            amount: Number(amount) * 100,
+            currency: "inr",
+        });
         res.status(201).json({  
             success :  true,
             clientSecret : paymentIntent.client_secret, 

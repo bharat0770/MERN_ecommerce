@@ -3,7 +3,7 @@ import CartItemCard from "../components/Cartitem";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { cartReducerInitialState } from "../types/reducer-types";
-import { cartItem } from "../types/types";
+import { cartItem } from "../types/types";  
 import {
     addToCart,
     applyDiscount,
@@ -13,6 +13,7 @@ import {
 import axios from "axios";
 
 const Cart = () => {
+    //?requires optimizing => use debouncing here
     const { token: CancelToken, cancel } = axios.CancelToken.source();
     const dispatch = useDispatch();
     const { subTotal, tax, shippingCharges, total, discount, cartItems } =
@@ -21,7 +22,7 @@ const Cart = () => {
         );
     useEffect(() => {
         dispatch(calculatePrice());
-    }, [cartItems]);
+    }, [cartItems, dispatch]);
     const [couponCode, setCouponCode] = useState<string>("");
     const [isValidCouponCode, setIsValidCouponCode] = useState<boolean>(false);
     useEffect(() => {

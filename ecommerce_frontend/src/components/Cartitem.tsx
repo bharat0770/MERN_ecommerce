@@ -14,10 +14,9 @@ return (
     <>
     <div className="cart-item">
         <img src={`${import.meta.env.VITE_SERVER}/uploads/${cartItem.photo}`} alt="product image"/>
-        {/* <img src={cartItem.photo} alt="product image"/> */}
         <div className="cart-item-info">
         <div className="cart-item-name">
-        <Link to = {`/poduct/${cartItem.productId}`}>{cartItem.name}</Link>
+        <Link to = {`/product/${cartItem.productId}`}>{cartItem.name}</Link>
         <p>{`₹${cartItem.price}`}</p>
         </div>
         <div className="cart-item-btns">

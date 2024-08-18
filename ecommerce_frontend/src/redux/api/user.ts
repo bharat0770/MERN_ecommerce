@@ -1,5 +1,5 @@
 import {  createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { MessageResponse } from "../../types/api-types";
+import { allUserResponse, deleteUserRequest, deleteUserResponse, MessageResponse } from "../../types/api-types";
 import { User } from "../../types/types";
 import axios from "axios";
 
@@ -16,7 +16,16 @@ export const userApi = createApi({
                 method: "POST",
                 body: user,
             }),
-        })
+        }), 
+        allUsers : builder.query<allUserResponse, string>({
+            query : (email) => `all?email=${email}`, 
+        }), 
+        deleteUser : builder.mutation<deleteUserResponse, deleteUserRequest>({
+            query : ({userEmail, email}) => ({
+                url : `delete?email=${email}&userEmail=${userEmail}`,
+                method : "DELETE", 
+            }), 
+        }), 
     })
 })
 
@@ -29,4 +38,4 @@ export const getUser = async (email:string) => {
     }
 }
 // useLoginMutation is a     hook based on login endpoint 
-export const {useLoginMutation}  = userApi;     
+export const {useLoginMutation, useAllUsersQuery, useDeleteUserMutation}  = userApi;     

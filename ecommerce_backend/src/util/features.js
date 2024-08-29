@@ -80,9 +80,13 @@ const getInventory = async (categories, productCount) => {
         let categoryProductCount = await Promise.all(categoryCountPromise);
 
         // Calculate the percentage of total products for each category
-        let categoryCount = categories.map((category, i) => ({
-            [category]: Math.floor((categoryProductCount[i] / productCount) * 100)
-        }));
+        let categoryCount = categories.map((category, i) => (
+            {
+            name : category, 
+            value : Math.floor((categoryProductCount[i] / productCount) * 100)
+        }
+    ));
+
         return categoryCount;
     } catch (err) {
         return new Error(err.message);
@@ -116,3 +120,7 @@ module.exports = {
     getInventory,
     getChartData,
 };
+
+
+
+

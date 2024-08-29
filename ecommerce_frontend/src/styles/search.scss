@@ -19,7 +19,7 @@
         >select, input{
             width : 100%; 
             outline: none;
-            border : .5px solid grey;
+            // border : .5px soli grey;
             border-radius: 5px;
             padding: 3px;
             font-family: $font1;
@@ -35,7 +35,6 @@
         border-radius: 10px;
         margin: 5px;
         padding-left: 20px;
-        // border: .5px solid grey;
         box-shadow: $boxshadow;
         width: 75%;
         box-sizing: border-box;
@@ -51,14 +50,12 @@
     }
     .product-list{
         position: relative;
-        // border: 1px solid black;
         height:  calc(100% - 10rem);
         display: flex;
-        // align-self: center;
         flex-wrap: wrap;
         overflow-y : auto;
+        gap: 5rem;
         align-items: flex-start;
-        // justify-content: space-evenly;
         &::-webkit-scrollbar{
             visibility: hidden;
         }

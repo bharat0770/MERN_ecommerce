@@ -31,9 +31,10 @@
         display: flex;
         flex-direction: column;
         img {
-            width: 80%;
+            width: auto;
+            max-width: 200px;
             border-radius: 10%;
-            height: auto;
+            height: 150px;
             object-fit: contain;
             align-self: center;
         }

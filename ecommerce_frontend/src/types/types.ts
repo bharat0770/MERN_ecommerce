@@ -25,7 +25,7 @@ export type Product = {
 export type cartItem = {
     productId : string; 
     price : number; 
-    stock : number;
+    stock : any ;
     name : string; 
     photo : string; 
     quantity : number; 

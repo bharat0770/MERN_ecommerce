@@ -15,7 +15,16 @@ const addItemsToCart = async(req, res, next) => {
             message :  result, 
         })
     }else{
-        oldCart.cartItems.push(...cartItems);
+        const updatedCartItems = [...oldCart.cartItems];
+        cartItems.forEach((item) => {
+            existingItemindex =  updatedCartItems.findIndex((i) => i.productId.toString() === item.productId.toString()); 
+            if(existingItemindex > -1){
+                updatedCartItems[existingItemindex].quantity += item.quantity;
+            }else{
+                updatedCartItems.push(item); 
+            }
+        })
+        oldCart.cartItems = updatedCartItems;
         const result = await oldCart.save(); 
         res.status(200).json({
             success : true, 
@@ -34,7 +43,6 @@ const removeItemsFromCart = async(req, res, next) => {
         return next(new errorHandler("cart doesn't exists", 401)); 
     }
         cart.cartItems = cart.cartItems.filter((i) => {
-            console.log(i); 
             return i.productId != productId; 
         }); 
     
@@ -50,7 +58,13 @@ const removeItemsFromCart = async(req, res, next) => {
 const getCart = async(req, res, next) => {
     try{
         const {userId} = req.query; 
-        const cart = await Cart.findOne({userId : userId}); 
+        // const cart = await Cart.findOne({userId : userId}); 
+        const cart = await Cart.findOne({ userId: userId })
+    .populate({
+        path: 'cartItems.productId',
+        model: 'Products', // The name of the Product model
+        select: 'name price photo', // Fields to include from the Product model
+    });
         if(!cart){
             return next(new errorHandler("cart doesn't exists", 401)); 
         }
@@ -87,3 +101,4 @@ module.exports = {
     getCart, 
     clearCart,
 };
+

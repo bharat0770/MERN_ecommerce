@@ -2,29 +2,46 @@ import React, { useEffect, useState } from "react";
 import CartItemCard from "../components/Cartitem";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { cartReducerInitialState } from "../types/reducer-types";
-import { cartItem } from "../types/types";  
+import { cartReducerInitialState, userReducerInitialState } from "../types/reducer-types";
+import { cartItem } from "../types/types";
 import {
     addToCart,
     applyDiscount,
     calculatePrice,
+    decreaseQuantity,
+    increaseQuantity,
     removeFromCart,
+    fetchCart,
+    updateCart,
+    deleteProduct,
 } from "../redux/reducer/cartReducer";
+
 import axios from "axios";
 
+
+
+
 const Cart = () => {
+    const dispatch = useDispatch();
+    const { user, loading } = useSelector(
+        (state: { userReducer: userReducerInitialState }) => {
+            return state.userReducer;
+        });
+    const userId = user?._id;
     //?requires optimizing => use debouncing here
     const { token: CancelToken, cancel } = axios.CancelToken.source();
-    const dispatch = useDispatch();
-    const { subTotal, tax, shippingCharges, total, discount, cartItems } =
-        useSelector(
-            (state: { cartReducer: cartReducerInitialState }) => state.cartReducer
-        );
+    const { subTotal, tax, shippingCharges, total, discount, cartItems } = useSelector(
+        (state: { cartReducer: cartReducerInitialState }) => state.cartReducer
+    );
+
+
     useEffect(() => {
         dispatch(calculatePrice());
     }, [cartItems, dispatch]);
+
     const [couponCode, setCouponCode] = useState<string>("");
     const [isValidCouponCode, setIsValidCouponCode] = useState<boolean>(false);
+
     useEffect(() => {
         const timeOutId = setTimeout(() => {
             axios
@@ -42,20 +59,27 @@ const Cart = () => {
                     setIsValidCouponCode(false);
                 });
         }, 1000);
+
         return () => {
             clearTimeout(timeOutId);
         };
     }, [couponCode]);
+
     const incrementHandler = (cartItem: cartItem) => {
         if (cartItem.quantity >= cartItem.stock) return;
-        dispatch(addToCart({ ...cartItem, quantity: cartItem.quantity + 1 }));
+        dispatch(increaseQuantity({ ...cartItem, quantity: cartItem.quantity + 1 }));
+        const { productId } = cartItem;
+        dispatch(updateCart({ userId, productId, quantity: 1 }))
     };
     const decrementHandler = (cartItem: cartItem) => {
         if (cartItem.quantity <= 1) return;
-        dispatch(addToCart({ ...cartItem, quantity: cartItem.quantity - 1 }));
+        dispatch(decreaseQuantity({ ...cartItem, quantity: cartItem.quantity - 1 }));
+        const { productId } = cartItem;
+        dispatch(updateCart({ userId, productId, quantity: -1 }))
     };
     const removeHandler = (productId: string) => {
         dispatch(removeFromCart(productId));
+        dispatch(deleteProduct({userId, productId}));
     };
     return (
         <>

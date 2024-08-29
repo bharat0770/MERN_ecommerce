@@ -5,7 +5,7 @@ $color1 : whitesmoke;
 $color2 : rgb(255, 119, 46);
 $color3 : rgb(38, 41, 117);
 $font1 :  "Playwrite NG Modern", cursive;
-$boxshadow: 0px 5px 5px 5px rgb(168, 168, 168);
+$boxshadow: 0px 5px 5px 5px rgba(168, 168, 168, 0.575);
 @import "header.scss"; 
 @import "adminHamburger.scss";
 @import "home.scss";
@@ -15,10 +15,12 @@ $boxshadow: 0px 5px 5px 5px rgb(168, 168, 168);
 @import "login.scss";
 @import "search.scss";
 @import "ProductManagement.scss"; 
+
 @import "../admin/management/styles/createProduct.scss";
 @import "../admin/management/styles/updateProduct.scss";
 @import "../admin/management/styles/transactionManagement.scss";
 @import "../admin/management/styles/transaction.scss";
+@import "../admin/management/styles/allProducts.scss";
 *{
     font-size: small;
 }

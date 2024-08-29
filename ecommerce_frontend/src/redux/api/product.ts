@@ -12,7 +12,8 @@ export const productApi = createApi({
     endpoints: (builder) => ({
         latestProduct: builder.query<allProductResponse, string>({ query: () => "latest", providesTags: ["product"]}),
         
-        // allProduct : builder.query<allProductResponse, string>({query : () => "admin-products"}) NOTE : requires admin routes 
+        allProduct : builder.query<allProductResponse, string>({query : (email) => `admin-products?email=${email}`}),  
+        // NOTE : requires admin routes 
         categories: builder.query<categoriesResponse, string>({ query: () => "categories", providesTags: ["product"] }),
         seachProduct: builder.query<searchProductResponse, searchProductRequest>({
             query: ({ search, sort, category, price, page }) => {
@@ -53,6 +54,6 @@ export const productApi = createApi({
     })
 })
 
-export const { useLatestProductQuery, useCategoriesQuery, useSeachProductQuery, useNewProductsMutation,  useUpdateProudctMutation, useDeleteProductMutation, useProductDetailsQuery} = productApi;
+export const { useLatestProductQuery, useCategoriesQuery, useSeachProductQuery, useNewProductsMutation,  useUpdateProudctMutation, useDeleteProductMutation, useProductDetailsQuery, useAllProductQuery} = productApi;
 
 

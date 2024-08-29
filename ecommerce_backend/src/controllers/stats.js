@@ -8,7 +8,6 @@ const getDashboradStats = async (req, res, next) => {
     try {
         // requires caching
         let stats = {};
-
         const today = new Date();
         const sixMonthAgo = new Date;
         sixMonthAgo.setMonth(sixMonthAgo.getMonth() - 6);
@@ -104,7 +103,6 @@ const getDashboradStats = async (req, res, next) => {
 
         // let categoryProductCount = await Promise.all(categoryCountPromise); 
         let categoryCount = await getInventory(categories, productCount);
-        console.log(categoryCount);
         // categories.forEach((category, i) => {
         //     categoryCount.push({
         //     [category] :  Math.floor((categoryProductCount[i]/productCount) * 100),   
@@ -144,7 +142,6 @@ const getDashboradStats = async (req, res, next) => {
             message: stats,
         })
     } catch (err) {
-        console.log(err.message)
         return next(new errorHandler(err.message, 401));
     }
 }
@@ -182,7 +179,7 @@ const getPieChart = async (req, res, next) => {
             shipped: shippedOrders,
             delivered: deliveredOrders,
         };
-        console.log("here" + categories, productCount);
+
         const productCategories = await getInventory(categories, productCount);
 
         const stockAvailablity = {

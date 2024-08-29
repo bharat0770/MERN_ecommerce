@@ -2,11 +2,7 @@
 const { Stripe } = require("stripe");
 const errorHandler = require("../middlewares/errorHandler.js");
 const Coupon = require("../models/coupon.js");
-// const { stripe } = require("../app.js");
-
-// const stripeKey = process.env.STRIPE_KEY || "sk_test_51PnvJ4EXtISc9LPGns8YyftZ3R7O22dW5BSkW8B6iyGyg01J0ZSynnRDTxW3XnUfXIkry50hSsCKCqgpfXOqV9RY00xgaA64hk"; 
 const stripeKey = process.env.STRIPE_KEY; 
-console.log(stripeKey); 
 
 const stripe = new Stripe(stripeKey);
 

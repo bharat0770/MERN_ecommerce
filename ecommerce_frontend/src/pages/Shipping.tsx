@@ -46,8 +46,8 @@ let Shipping = () => {
     }
     return (
         <div className='shippingDetails'>
-            <h1>Shipping</h1>
             <form onSubmit={submitHandler}>
+            <h1>Shipping Info</h1>
                 <input type="text"
                     placeholder="address"
                     name="address"

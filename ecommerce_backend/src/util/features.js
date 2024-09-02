@@ -8,7 +8,8 @@ const connectDB = () => {
     // })
     // .then((c) => { console.log(`DB connectred to ${c.connection.host}`)})
     // .catch((e) => {console.log(e)});
-    return mongoose.connect("mongodb://localhost:27017/Ecommerce_24");
+    // return mongoose.connect("mongodb://localhost:27017/Ecommerce_24");
+    return mongoose.connect(process.env.MONGO_URL);
 };
 
 const setCache = (key, productList) => {

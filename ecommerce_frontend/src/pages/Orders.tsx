@@ -33,7 +33,8 @@ const Orders = () => {
 };
 
 
-const OrderCard = ({id,  amount, discount, status}) => {
+
+const OrderCard = ({id,  amount, discount, status} :any) => {
     return (
         <>
         <div className='transaction-items'>

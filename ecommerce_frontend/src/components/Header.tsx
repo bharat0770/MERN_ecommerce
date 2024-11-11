@@ -12,14 +12,14 @@ import AdminHamburger from "./AdminHamburger";
 interface Proptypes {
     user: User | null,
 }
-const Header = ({ user }: Proptypes) => {
+const Header = ({ user }: Proptypes)=> {
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const logoutHandeler = async () => {
         try {
             await signOut(auth);
             toast.success("Signed out successfully");
             setIsOpen(false);
-        } catch (error) {
+        } catch (error :any) {
             console.log(error.message);
         }
     };

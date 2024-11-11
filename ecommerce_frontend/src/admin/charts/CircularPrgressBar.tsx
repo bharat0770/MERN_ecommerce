@@ -1,6 +1,6 @@
 import React from 'react'
 import { RadialBarChart, RadialBar, ResponsiveContainer } from 'recharts';
-const CircularPrgressBar = ({ name, value, fill }) => {
+const CircularPrgressBar = ({ name, value, fill } : any) => {
     if(value > 1000){
         value = 999;    
     }

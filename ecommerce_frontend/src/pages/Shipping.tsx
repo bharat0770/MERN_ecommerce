@@ -45,6 +45,7 @@ let Shipping = () => {
         })
     }
     return (
+        <>
         <div className='shippingDetails'>
             <form onSubmit={submitHandler}>
             <h1>Shipping Info</h1>
@@ -54,26 +55,26 @@ let Shipping = () => {
                     value={shippingInfo.address}
                     onChange={stateChange}
                     required
-                />
+                    />
                 <input type="text"
                     placeholder="city"
                     name="city"
                     value={shippingInfo.city}
                     onChange={stateChange}
                     required
-                />
+                    />
                 <input type="text"
                     placeholder="state"
                     name="state"
                     value={shippingInfo.state}
                     onChange={stateChange}
                     required
-                />
+                    />
                 <select name="country"
                     value={shippingInfo.country}
                     
                     onChange={stateChange}
-                >
+                    >
                     <option value="India">India</option>
                     <option value="US">Us</option>
                     <option value="Japan">Japan</option>
@@ -85,10 +86,12 @@ let Shipping = () => {
                     value={shippingInfo.pinCode}
                     onChange={stateChange}
                     required
-                />
-                <button type="submit" className="btn-pay">pay now</button>
+                    />
+                
+                <button type="submit" className="btn-pay">pay now </button>
             </form>
         </div>
+                    </>
     )
 }
 export default Shipping;

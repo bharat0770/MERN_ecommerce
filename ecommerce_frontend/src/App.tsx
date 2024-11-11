@@ -5,7 +5,7 @@ import { Toaster } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Header from "./components/Header";
-import { Loader } from "./components/loader";
+// import { Loader } from "./components/loader";
 import ProtectedRoute from "./components/protected-route";
 import { auth } from "./firebase";
 import CheckOut from "./pages/CheckOut";
@@ -39,7 +39,7 @@ const Search = lazy(() => import("./pages/Search"));
 // import { setCart } from "./redux/reducer/cartReducer";
 
 
-const getCart = async (userId) => {
+const getCart = async (userId : any) => {
   try {
       const res = await axios.get(`${import.meta.env.VITE_SERVER}/api/v1/cart/getCart?userId=${userId}`);
       return res;
@@ -71,7 +71,7 @@ function App() {
         } else {
           dispatch(userNotExist());
         }
-      } catch (e) {
+      } catch (e :any) {
         console.log(e.message);
       }
     });

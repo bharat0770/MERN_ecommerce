@@ -1,7 +1,7 @@
 import React from 'react'
 import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
-const GenderRatioChart = ({ data }) => {
+const GenderRatioChart = ({ data } : any) => {
     const pieData = [
         {name:  "male" , value : data.male, },
         { name : "female", value: data.female, }
